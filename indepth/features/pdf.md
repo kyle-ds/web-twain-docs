@@ -53,11 +53,11 @@ The method [ `SetConvertMode()` ]({{site.info}}api/Addon_PDF.html#setconvertmode
 
 ### Questions
 
-#### Q: When shall I use PDFR?
+#### Q: When do I need to use PDF Rasterizer?
 
 A: `PDFR` is only required for text-based PDFs, to find out whether a file is text-based. Use the method [ `IsTextBasedPDF()` ]({{site.info}}api/Addon_PDF.html#istextbasedpdf) .
 
-#### Q: When is it effective?
+#### Q: When is PDF Rasterizer activated?
 
 A: Once `PDFR` has been configured, it will automatically detect if a file needs to be rasterized and if so, it will convert it to an image(s) with the set resolution(if no resolution is set, the default is 200). This happens when you call any of the following methods
 
