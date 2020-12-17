@@ -22,3 +22,8 @@ description: Dynamic Web TWAIN SDK Documentation Schedule Features To Consider P
 ## Support more file formats
 
 ## Image Processing Features
+
+## Improve the tagging mechanism
+
+* Add a method to remove a specifed tag from one or multiple images (if not specified, remove from all).
+* Add a method to return the the status of the tags (tags and images under each tag).

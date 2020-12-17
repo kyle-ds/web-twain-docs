@@ -496,7 +496,7 @@ sources.find(function(name, index) {
 #### On Windows desktop where the scanner is physically connected
 
 1. Install `Dynamsoft Service`
-2. Configure the Service by finding the file `DSConfiguration.ini` and adding the following line
+2. Configure the Service by adding the following line to the file `DSConfiguration.ini` 
 
 ``` 
 Server=192.168.8.221

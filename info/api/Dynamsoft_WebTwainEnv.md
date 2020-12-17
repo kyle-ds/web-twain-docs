@@ -8,6 +8,7 @@ description: Dynamic Web TWAIN SDK Documentation API Reference Global APIs Page
 ---
 
 # `Dynamsoft.WebTwainEnv`
+
 > Global properties and functions.
 
 ``` typescript
@@ -62,6 +63,11 @@ interface Dynamsoft.WebTwainEnv {
     OnWebTwainPreExecute: function () {};
     OnWebTwainReady: function () {};
     OnWebTwainWillInit: function () {};
+    CustomizableDisplayInfo: CustomizableDisplayInfo;
+}
+interface CustomizableDisplayInfo {
+  // Specify the source of the loader bar.
+  loaderBarSource: string;
 }
 ```
 
@@ -82,72 +88,71 @@ interface Container {
 
 ### `IfAddMD5InUploadHeader`
 
-  
 Whether or not an md5 header `dwt-md5` should be included in HTTP upload requests. Note that this header is not a standard header and may be deemed invalid on some web servers.
   
 The default value is `false` .
 
 ### `ProductKey`
 
-  
-  Sets or returns the product key for the library. A product key is required to enables certain modules of the library.
-  
+Sets or returns the product key for the library. A product key is required to enables certain modules of the library.
 
 ### `ResourcesPath`
 
-  
-  Sets or returns where the library looks for resources files including service installers, CSS, etc.
+Sets or returns where the library looks for resources files including service installers, CSS, etc.
   
 
 ### `UseLocalService`
 
-  Sets or returns whether to use the service or use WASM only. This property can be changed at runtime (but not recommended) and affects `WebTwain` instances created after the change.
+Sets or returns whether to use the service or use WASM only. This property can be changed at runtime (but not recommended) and affects `WebTwain` instances created after the change.
 
-  The default value is `true` .
+The default value is `true` .
 
 ## Functions
 
 ### `CreateDWTObject()`
 
-  Creates a new `WebTwain` instance that listens to the specified host & ports. An UI element specified by the parameter `ContainerId` which is typically a <div> is required. The library will generate a UI and bind it to this element.
-  
+Creates a new `WebTwain` instance that listens to the specified host & ports. An UI element specified by the parameter `ContainerId` which is typically a <div> is required. The library will generate a UI and bind it to this element.
 
 ### `CreateDWTObjectEx()`
 
-  Creates a new UI-less `WebTwain` instance. This instance will be uniquely identified by the parameter `WebTwainId` .
+Creates a new UI-less `WebTwain` instance. This instance will be uniquely identified by the parameter `WebTwainId` .
 
 ``` typescript
-  interface DWTInitialConfig {
-
-      WebTwainId: string,
-          Host ? : string,
-          Port ? : string,
-          PortSSL ? : string
-
-  }
+interface DWTInitialConfig {
+  WebTwainId: string,
+  Host ? : string,
+  Port ? : string,
+  PortSSL ? : string
+}
 ```
 
 ### `DeleteDWTObject()`
 
-  Delete the `WebTwain` instance specified by `Id` which can either be a `ContainerId` or a `WebTwainId` .
+Delete the `WebTwain` instance specified by `Id` which can either be a `ContainerId` or a `WebTwainId` .
 
 ### `GetWebTwain()`
 
-  Gets an `WebTwain` instance by its `ContainerId` .
+Gets an `WebTwain` instance by its `ContainerId` .
 
 ### `GetWebTwainEx()`
 
-  Gets an `WebTwain` instance by its `WebTwainId` .
-  
+Gets an `WebTwain` instance by its `WebTwainId` .
 
 ### `Load()`
 
-  Initiates the library. If there are predefined `Containers` , one `WebTwain` instance will be created for each `Container` .
+Initiates the library. If there are predefined `Containers` , one `WebTwain` instance will be created for each `Container` .
 
 ### `RegisterEvent()`
 
-  Registers an environmental event. Typically the event is `OnWebTwainReady` which is triggered when the initialization completes.
+Registers an environmental event. Typically the event is `OnWebTwainReady` which is triggered when the initialization completes.
 
 ### `Unload()`
 
-  Destroys all `WebTwain` instances and cuts off the connection to the Dynamsoft Service.
+Destroys all `WebTwain` instances and cuts off the connection to the Dynamsoft Service.
+
+### `CustomizableDisplayInfo`
+
+#### loaderBarSource
+
+Specify the source of the loader bar.
+  

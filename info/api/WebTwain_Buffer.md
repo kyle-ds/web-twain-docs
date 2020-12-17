@@ -11,8 +11,10 @@ description: Dynamic Web TWAIN SDK Documentation API Reference Buffer APIs Page
 
 **Methods**
 
-* [ClearImageTags()](#clearimagetags) 
+* [ClearImageTags()](#clearimagetags)
+* [RenameTag()](#renametag)
 * [FilterImagesByTag()](#filterimagesbytag)
+* [ClearFilter()](#clearfilter)
 * [SetDefaultTag()](#setdefaulttag) 
 * [TagImages()](#tagimages)
 * [GetImageBitDepth()](#getimagebitdepth)
@@ -60,6 +62,7 @@ description: Dynamic Web TWAIN SDK Documentation API Reference Buffer APIs Page
 
 **Events**
 
+* [OnBufferChanged](#onbufferchanged)
 * [OnBitmapChanged](#onbitmapchanged)
 * [OnIndexChangeDragDropDone](#onindexchangedragdropdone)
 * [OnTopImageInTheViewChanged](#ontopimageintheviewchanged)
@@ -97,7 +100,22 @@ ImageIDToIndex(imageId: number): number;
 **Usage notes**
 
 An `imageId` is unique and won't change as long as the Dynamsoft Service process is running. It's a better way to keep track of an image than the `index` which changes easily.
+---
 
+## RenameTag
+
+**Syntax**
+
+``` typescript
+/**
+ * Rename a tag.
+ * @param oldName Specify the tag to change.
+ * @param newName Specify the new tag name.
+ */
+RenameTag(oldName:string, newName:string): boolean;
+```
+
+---
 ## ClearImageTags
 
 **Syntax**
@@ -125,7 +143,18 @@ FilterImagesByTag(tag: string): boolean;
 ```
 
 ---
+## ClearFilter
 
+**Syntax**
+
+``` typescript
+/**
+ * Stop filtering images by tag.
+ */
+ClearFilter(): boolean;
+```
+
+---
 ## SetDefaultTag
 
 **Syntax**
@@ -679,6 +708,40 @@ Both `BlankImageCurrentStdDev` and `BlankImageMaxStdDev` range from 0 to 100.
  */
 IfAllowLocalCache: boolean;
 ```
+
+---
+
+## OnBufferChanged
+
+**Syntax**
+
+``` typescript
+/**
+ * An enhanced callback triggered when a change occurs in the buffer.
+ * @argument bufferChangeInfo Details about the buffer change.
+ */
+RegisterEvent('OnBufferChanged',
+    function (bufferChangeInfo: BufferChangeInfo) {}
+): boolean;
+
+interface BufferChangeInfo {
+    // the action type which includes 'add', 'remove', 'modify', 'shift' and 'filter'
+    action: string;
+    currentId: number;
+    imageIds: number[];
+    selectedIds: number[];
+}
+```
+
+**Usage notes**
+
+Operation types include 
+
+1: new image(s) were added at the tail
+2: new image(s) were inserted before the current index
+3: image(s) are deleted
+4: image(s) are modified
+5: indices of images changed
 
 ---
 
