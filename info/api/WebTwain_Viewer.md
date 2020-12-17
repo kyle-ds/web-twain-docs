@@ -56,12 +56,11 @@ description: Dynamic Web TWAIN SDK Documentation API Reference Viewer APIs Page
 * [showCustomElement](#showcustomelement)
 * [hideCustomElement](#hidecustomelement)
 * [toggleCustomElement](#togglecustomelement)
-* [showVideo()](#showvideo)
-* [closeVideo()](#closevideo)
 * [on()](#on)
 
 **Properties**
 
+* [cursor](#cursor)
 * [bOnlyShowThumbnailsView](#bonlyshowthumbnailsview)
 * [cursorOverThumbnailsView](#cursoroverthumbnailsview)
 
@@ -741,36 +740,6 @@ hideCustomElement(Id: string): boolean;
  * @param name Specify the element by its Id.
  */
 toggleCustomElement(Id: string): boolean;
-```
-
----
-
-## showVideo
-
-**Syntax**
-
-``` typescript
-/**
- * Start streaming video from the current camera in the viewer.
- * @param deviceId Specify a camera.
- * @param resolution Specify the initial resolution.
- */
-showVideo(deviceId?: string,
-    resolution?: Resolution
-): Promise<Resolution>;
-```
-
----
-
-## closeVideo
-
-**Syntax**
-
-``` typescript
-/**
- * Close the camera and hide the video streaming UI.
- */
-closeVideo(): void;
 ```
 
 ---

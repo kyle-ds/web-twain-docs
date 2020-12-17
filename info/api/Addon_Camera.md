@@ -26,6 +26,8 @@ description: Dynamic Web TWAIN SDK Documentation API Reference Camera Addon APIs
 * [stop()](#stop)
 * [getStatus()](#getstatus)
 * [capture()](#capture)
+* [showVideo()](#showvideo)
+* [closeVideo()](#closevideo)
 
 ---
 
@@ -145,9 +147,11 @@ If the camera is playing, the actual resolution is returned. If the camera is no
  * Start streaming video from the current camera.
  * @param element Specify an HTML element to put the video stream in.
  * @param resolution Specify the initial resolution.
+ * @param fill Whether to fill the viewer space with the video stream and leave no margin. The default value is `false`.
  */
 play(element?: HTMLElement,
-    resolution?: Resolution
+    resolution?: Resolution,
+    fill?: boolean
 ): Promise<Resolution>;
 ```
 
@@ -155,7 +159,7 @@ play(element?: HTMLElement,
 
 If no camera is chosen, the default camera is used. 
 
-If the method is called without arguments or `null` is passed to `element`, the video will show in the main viewer.
+If the method is called without arguments or `null` is passed to `element` , the video will show in the main viewer.
 
 ---
 
@@ -224,4 +228,44 @@ The status string is either empty or one of the following: "playing", "paused", 
  * Capture a frame from the video stream.
  */
 capture(): Promise<Blob>;
+```
+
+---
+
+## showVideo
+
+**Syntax**
+
+``` typescript
+/**
+ * Start streaming video from the current camera in the viewer.
+ * @param deviceId Specify a camera.
+ * @param resolution Specify the initial resolution.
+ * @param mode Specify the mode.
+ * @param fill Whether to fill the viewer area with the video stream and leave no margin.
+ */
+showVideo(deviceId?: string,
+    resolution?: Resolution,
+    mode?: string,
+    fill?: boolean
+): Promise<Resolution>;
+```
+
+**Usage notes**
+
+There are two available modes: `document` and `picture`.
+* `picture`: border detection is turned off and supports taking images consecutively. This is the default mode.
+* `document`: border detection will be on and only supports taking one image at a time.
+
+---
+
+## closeVideo
+
+**Syntax**
+
+``` typescript
+/**
+ * Close the camera and hide the video streaming UI.
+ */
+closeVideo(): void;
 ```
