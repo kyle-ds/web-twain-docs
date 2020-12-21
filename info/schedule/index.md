@@ -1,3 +1,4 @@
+
 ---
 layout: default-layout
 needAutoGenerateSidebar: false
@@ -13,7 +14,7 @@ description: Dynamic Web TWAIN SDK Documentation Schedule Index Page
 
 ## [Beta]({{site.info}}schedule/beta.html)
 
-## [Devlopping]({{site.info}}schedule/developing.html)
+## [Developing]({{site.info}}schedule/developing.html)
 
 ## [Proposed]({{site.info}}schedule/proposed.html)
 
