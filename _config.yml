@@ -1,5 +1,6 @@
-repositoryUrl: https://github.com/Dynamsoft/web-twain-docs/master
-firstLevelUrl: /web-twain
+repositoryUrl: https://github.com/Dynamsoft/web-twain-docs/blob/master
+firstLevelUrl: /web-twain/docs
+repository: Dynamsoft/web-twain-docs
 docFullPath: https://www.dynamsoft.com/web-twain/docs
 productUrl: https://www.dynamsoft.com/Products/WebTWAIN_Overview.aspx
 productName: Dynamic Web TWAIN

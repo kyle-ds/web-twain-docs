@@ -11,4 +11,6 @@ description: Dynamic Web TWAIN SDK Documentation Troubleshooting Index Page
 
 ## [How to debug]({{site.indepth}}troubleshooting/debug.html)
 
-## [Handle Errors]({{site.indepth}}troubleshooting/handle-errors.html)
+## [License Errors]({{site.indepth}}troubleshooting/license-errors/index.html)
+
+## [Common Errors]({{site.indepth}}troubleshooting/common-errors/index.html)

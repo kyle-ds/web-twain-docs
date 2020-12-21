@@ -9,7 +9,7 @@ description: Dynamic Web TWAIN SDK Documentation API Reference Acquire APIs Page
 
 # WebTwain Scan
 
-> The following APIs are compatible with  TWAIN | ICA | SANE (Windows, macOS and Linux)
+> The following APIs are compatible with TWAIN, ICA, SANE (Windows, macOS and Linux)
 
 **Methods**
 
@@ -106,7 +106,7 @@ description: Dynamic Web TWAIN SDK Documentation API Reference Acquire APIs Page
 * [ImageBitsPerPixel](#imagebitsperpixel) 
 * [ImageLength](#imagelength)
 * [ImageWidth](#imagewidth) 
-* [ImageXResolution](#imagexresolution)|
+* [ImageXResolution](#imagexresolution)
 * [ImageYResolution](#imageyresolution) 
 * [XferCount](#xfercount)
 * [MagData](#magdata) 

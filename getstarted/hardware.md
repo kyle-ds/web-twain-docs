@@ -50,14 +50,14 @@ After you have installed the driver for your scanner, you can refer to the follo
 
   + If the scanner appears in the dropdown, try scanning to make sure it works correctly without any errors. Errors will appear in the message box under the viewer. 
 
-* [Recommended] Use the tool called `Twacker` which is developed by the [TWAIN Working Group](http://www.twain.org/)
+* [Recommended] Use the tool called `Twacker` which is developed by the [TWAIN Working Group](https://www.twain.org/)
 
   + Download and install
 
     > In most cases, please dowload the 32-bit version
 
-    - [32-bit](http://download.dynamsoft.com/tool/Twack_32.msi)
-    - [64-bit](http://download.dynamsoft.com/tool/Twack_64.msi)
+    - [32-bit](https://download.dynamsoft.com/tool/Twack_32.msi)
+    - [64-bit](https://download.dynamsoft.com/tool/Twack_64.msi)
 
   + Open the program
 
@@ -77,7 +77,7 @@ After you have installed the driver for your scanner, you can refer to the follo
 
 ![Hardware-Scanners-Cameras-9]({{site.assets}}imgs/Hardware-Scanners-Cameras-9.png)
 
-* Refer to the official [twain-certified-drivers](http://resource.twain.org/twain-certified-drivers/). 
+* Refer to the official [twain-certified-drivers](https://resource.twain.org/twain-certified-drivers/). 
 
 > This list is maintained by hardware vendors and may be incomplete. In this case, try the two ways above instead.
 
@@ -85,8 +85,8 @@ After you have installed the driver for your scanner, you can refer to the follo
 
 If you don't have a TWAIN scanner at hand to test the library. You can download and use a virtual scanner. 
 
-* [32-bit virtual scanner](http://www.dynamsoft.com/download/TWAIN/twainds.win32.installer.2.1.3.msi)
-* [64-bit virtual scanner](http://www.dynamsoft.com/download/TWAIN/twainds.win64.installer.2.1.3.msi)
+* [32-bit virtual scanner](https://www.dynamsoft.com/download/TWAIN/twainds.win32.installer.2.1.3.msi)
+* [64-bit virtual scanner](https://www.dynamsoft.com/download/TWAIN/twainds.win64.installer.2.1.3.msi)
 
 ### TWAIN and WIA
 
