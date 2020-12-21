@@ -8,553 +8,99 @@ description: Dynamic Web TWAIN SDK Documentation API Reference Viewer APIs Page
 ---
 
 # `WebTwain.Viewer`
-> For WebTwain instances
 
 **Methods**
 
-* [BindViewer()](#bindviewer)
-* [UnbindView()](#unbindviewer)
-* [UpdateViewer()](#updateviewer)
-
-**Properties**
-
-* [BackgroundColor](#backgroundcolor) 
-* [SelectionImageBorderColor](#selectionimagebordercolor)
-* [FitWindowType](#fitwindowtype) 
-* [IfFitWindow](#iffitwindow)
-* [Height](#height) 
-* [Width](#width)
-* [IfAutoScroll](#ifautoscroll) 
-* [ShowPageNumber](#showpagenumber)
-* [MouseX](#mousex)
-* [MouseY](#mousey)
-* [ImageMargin](#imagemargin) 
-* [MouseShape](#mouseshape)
-* [SelectionRectAspectRatio](#selectionrectaspectratio) 
-* [Zoom](#zoom)
-
-**Events**
-
-* [OnMouseClick](#onmouseclick) 
-* [OnMouseDoubleClick](#onmousedoubleclick)
-* [OnMouseMove](#onmousemove) 
-* [OnMouseRightClick](#onmouserightclick)
-* [OnImageAreaSelected](#onimageareaselected)
-* [OnImageAreaDeSelected](#onimageareadeselected)
-
-> For the WebTwain. Viewer interface
-
-**Methods**
-
-* [setViewMode()](#setviewmode) 
-* [updateUISettings()](#updateuisettings)
-* [setButtonClass()](#setbuttonclass) 
-* [setSelectedImageArea()](#setselectedimagearea)
-* [zoomIn()](#zoomin) 
-* [zoomOut()](#zoomout)
-* [bindCustomElement](#bindcustomelement) 
-* [showCustomElement](#showcustomelement)
-* [hideCustomElement](#hidecustomelement)
-* [toggleCustomElement](#togglecustomelement)
+* [bind()](#bind)
+* [clearSelectedAreas()](#clearselectedareas)
+* [createCustomElement()](#createcustomelement)
+* [createImageEditor()](#createimageeditor)
+* [createThumbnailViewer()](#createthumbnailviewer)
+* [first()](#first)
+* [fitWindow()](#fitwindow)
+* [getUISettings()](#getuisettings)
+* [gotoPage()](#gotopage)
+* [hide()](#hide)
+* [last()](#last)
+* [next()](#next)
+* [off()](#off)
 * [on()](#on)
+* [previous()](#previous)
+* [render()](#render)
+* [resetUISettings()](#resetuisettings)
+* [setButtonClass()](#setbuttonclass)
+* [setSelectedAreas()](#setselectedAreas)
+* [setViewMode()](#setviewmode) 
+* [show()](#show)
+* [unbind()](#unbind)
+* [updateUISettings()](#updateuisettings)
 
 **Properties**
 
+* [acceptDrop](#acceptdrop)
+* [allowSlide](#allowslide)
+* [background](#background)
+* [border](#border)
 * [cursor](#cursor)
-* [bOnlyShowThumbnailsView](#bonlyshowthumbnailsview)
-* [cursorOverThumbnailsView](#cursoroverthumbnailsview)
+* [height](#height)
+* [idPostfix](#idpostfix)
+* [ifAutoScroll](#ifautoscroll)
+* [innerBorder](#innerBorder)
+* [pageMargin](#pagemargin)
+* [selectedAreaBorderColor](#selectedareabordercolor)
+* [selectedPageBackground](#selectedpagebackground)
+* [selectedPageBorder](#selectedpageborder)
+* [selectionRectAspectRatio](#selectionrectaspectratio)
+* [showPageNumber](#showpagenumber)
+* [singlePageMode](#singlepagemode)
+* [width](#width)
+* [zoom](#zoom)
 
 **Events**
 
-* [video-closed](#vidoe-closed)
-* [video-error](#vidoe-error)
-
----
-
-## BindViewer
-
-**Syntax**
-
-``` typescript
-/**
- * Create a Dynamsoft Viewer instance and bind it to the WebTwain instance.
- * @param elementId Specify an HTML element to create the viewer.
- * @param config Configuration of the viewer.
- */
-BindViewer(
-    elementId: string,
-    config ? : BasicViewerConfig
-): boolean;
-
-interface BasicViewerConfig {
-    /**
-     * Specify the size of the viewer.
-     */
-    Height: number | string;
-    Width: number | string;
-    /**
-     * Set up the content view.
-     */
-    view: ContentView;
-}
-
-interface ContentView {
-    /**
-     * Whether to show the content view or not.
-     * If set to false, then only thumbnails view is shown.
-     */
-    bShow: boolean;
-    /**
-     * Specify the width of the major content view.
-     */
-    Width: number | string;
-}
-```
-
----
-
-## UpdateViewer
-
-**Syntax**
-
-``` typescript
-/**
- * Update the viewer with the new configuration.
- * @param config Configuration of the viewer.
- */
-UpdateViewer(config: BasicViewerConfig): boolean;
-
-interface BasicViewerConfig {
-    /**
-     * Specify the size of the viewer.
-     */
-    Height: number | string;
-    Width: number | string;
-    /**
-     * Set up the content view.
-     */
-    view: ContentView;
-}
-
-interface ContentView {
-    /**
-     * Whether to show the content view or not.
-     * If set to false, then only thumbnails view is shown.
-     */
-    bShow: boolean;
-    /**
-     * Specify the width of the major content view.
-     */
-    Width: number | string;
-}
-```
-
----
-
-## UnbindViewer
-
-**Syntax**
-
-``` typescript
-/**
- * Unbind and destroy the viewer.
- */
-UnbindViewer(): boolean;
-```
-
-**Example**
-
-``` javascript
-/**
- * Create a viewer in the div with the Id 'dwtcontrolContainer'. Use default settings.
- */
-DWObject.BindViewer('dwtcontrolContainer');
-```
-
-Example configurations of the viewer, note that both hardcoded numbers (of pixels) and percentages can be used to specify the size of the viewer.
-
-``` javascript
-DWObject.UpdateViewer({
-    Height: 600, // 600 pixels high
-    Width: 500, // 500 pixels wide
-    view: {
-        bShow: true, // Show the content view
-        Width: 300 // The content view is 300 pixels wide
-    }
-});
-```
-
-``` javascript
-DWObject.UpdateViewer({
-    Height: "60%", // 60% height of the parent element
-    Width: "50%", // 50% width of the parent element
-    view: {
-        bShow: true, // Show the content view
-        Width: "80%" // 80% width of the viewer
-    }
-});
-```
-
----
-
-## BackgroundColor
-
-**Syntax**
-
-``` typescript
-/**
- * Return or set the background colour | image of the viewer.
- */
-BackgroundColor: number | string;
-```
-
-**Usage notes**
-
-The number that represents the number comes in the form of 0xRRGGBB. For example, the following code sets the background to pure Green.
-
-``` javascript
-DWObject.BackgroundColor = 0x00ff00;
-```
-
-You can also set an image as the background by its URL. For example
-
-``` javascript
-DWObject.BackgroundColor = "url(https://demo.dynamsoft.com/dwt/Images/icon-dwt.svg)";
-```
-
----
-
-## SelectionImageBorderColor
-
-**Syntax**
-
-``` typescript
-/**
- * Return or set the border colour for selected image(s).
- */
-SelectionImageBorderColor: number;
-```
-
-**Usage notes**
-
-By default the colour is white (0xffffff). The byte-ordering of the 24-bit RGB value is **RRGGBB**. RR represents red, GG represents green and BB represents blue.
-
----
-
-## FitWindowType
-
-**Syntax**
-
-``` typescript
-/**
- * Return or set how the image is fit in the viewer.
- */
-FitWindowType: number;
-```
-
-**Usage notes**
-
-This API only works if the view mode of the viewer is set to -1 by -1.
-
-The allowed values of `FitWindowType` are
-
-* `0` : Default value, try to fit the image both horizontally and vertically.
-* `1` : Fit the image vertically.
-* `2` : Fit the image horizontally.
-
----
-
-## IfFitWindow
-
-**Syntax**
-
-``` typescript
-/**
- * Return or set whether to fit the current image to the viewer window.
- */
-IfFitWindow: boolean;
-```
-
-**Usage notes**
-
-This API only works if the view mode of the viewer is set to -1 by -1.
-
-The default value of `IfFitWindow` is true.
-
----
-
-## Height
-
-**Syntax**
-
-``` typescript
-/**
- * Return or set the height of the viewer.
- */
-Height: number | string;
-```
-
----
-
-## Width
-
-**Syntax**
-
-``` typescript
-/**
- * Return or set the width of the viewer.
- */
-Width: number | string;
-```
-
-**Usage notes**
-
-Example values
-
-* `number`
-
-``` javascript
-DWObject.Height = 600; // 600 pixels high
-DWObject.Width = 500; // 500 pixels wide
-```
-
-* `string`
-
-``` javascript
-DWObject.Height = "600px"; // 600 pixels high
-DWObject.Width = "500px"; // 500 pixels wide
-```
-
-Or
-
-``` javascript
-DWObject.Height = "50%"; // 50% of the parent element's height
-DWObject.Width = "50%"; // 50% of the parent element's width
-```
-
----
-
-## MouseX
-
-**Syntax**
-
-``` typescript
-/**
- * Return the horizontal coordinate of the mouse.
- */
-readonly MouseX: number;
-```
-
----
-
-## MouseY
-
-**Syntax**
-
-``` typescript
-/**
- * Return the vertical coordinate of the mouse.
- */
-readonly MouseY: number;
-```
-
-**Usage notes**
-
-The coordinates are meaured in pixels and is based on the original size of the image.
-
-**Example**
-
-``` javascript
-DWObject.RegisterEvent('OnMouseMove',
-    function() {
-        console.log("X: " + DWObject.MouseX + " Y: " + DWObject.MouseY);
-    }
-);
-```
-
----
-
-## SelectionRectAspectRatio
-
-**Syntax**
-
-``` typescript
-/**
- * Change the position of an image in the buffer.
- * @param from Specify the original position by index.
- * @param to Specify the target position by index.
- */
-SelectionRectAspectRatio: number;
-```
-
----
-
-## MouseShape
-
-**Syntax**
-
-``` typescript
-/**
- * Return or set the shape of the cursor.
- */
-MouseShape: boolean;
-```
-
-**Usage notes**
-
-Unlike [cursorOverThumbnailsView](#cursoroverthumbnailsview), this property set the shape of the cursor that's effective both on the thumbnails view and the content view.
-
-The allowed values are
-
-* `true` : The default value. The shape is "hand".
-* `false` : The shape is "crosshair" and you can drag to select an area on the image.
-
-**Example**
-
-``` javascript
-DWObject.MouseShape = false;
-```
-
----
-
-## IfAutoScroll
-
-**Syntax**
-
-``` typescript
-/**
- * Return or set whether the thumbnails view scrolls when new images come in.
- */
-IfAutoScroll: boolean;
-```
-
-**Usage notes**
-
-By default, the property is `true` which means the thumbnails view will scroll to show the latest acquire/loaded images.
-
-Set it to `false` if you want the view to keep showing the same images even as more images are acquire/loaded.
-
-**Example**
-
-``` javascript
-DWObject.IfAutoScroll = false;
-```
-
----
-
-## ShowPageNumber
-
-**Syntax**
-
-``` typescript
-/**
- * Return or set whether to show the page numbers.
- */
-ShowPageNumber: boolean;
-```
-
-**Usage notes**
-
-The page number indicates the order of the images.
-
-When the viewmode is -1 * -1, page numbers will be hidden.
-
----
-
-## ImageMargin
-
-**Syntax**
-
-``` typescript
-/**
- * Return or set the margin between images (in pixels).
- */
-ImageMargin: number;
-```
-
-**Usage notes**
-
-The image margin is only effective when the view mode is not 1 * 1 nor -1 * -1.
-
----
-
-## Zoom
-
-**Syntax**
-
-``` typescript
-/**
- * Return or set the zoom factor.
- */
-Zoom: number;
-```
-
-**Usage notes**
-
-The zoom factor is only effective when the view mode is -1 * -1. 
-
-When you set the property and the view mode is -1 * -1, the view will zoom in or out.
-
----
-
-## OnMouseClick
-
-## OnMouseDoubleClick
-
-## OnMouseMove
-
-## OnMouseRightClick
-
-**Syntax**
-
-``` typescript
-/**
- * A built-in callback triggered when the mouse click | double-click | right-click on an image or move over it.
- * @argument index Specify the image.
- */
-RegisterEvent('OnMouseClick', function(index: number) {}): boolean;
-RegisterEvent('OnMouseDoubleClick', function(index: number) {}): boolean;
-RegisterEvent('OnMouseRightClick', function(index: number) {}): boolean;
-RegisterEvent('OnMouseMove', function(index: number) {}): boolean;
-```
-
----
-
-## OnImageAreaSelected
-
-**Syntax**
-
-``` typescript
-/**
- * A built-in callback triggered when a rectangle is selected on an image in the buffer.
- * @argument index Specify the image.
- * @argument left, top, right, bottom: Return the coordinates of the rectangle.
- * @argument rectangleIndex The index of the rectangle
- */
-RegisterEvent('OnImageAreaSelected',
-    function (index: number,
-        left: number, top: number,
-        right: number, bottom: number,
-        rectangleIndex: number
-    ) {}
-): boolean;
-```
-
----
-
-## OnImageAreaDeSelected
-
-**Syntax**
-
-``` typescript
-/**
- * A built-in callback triggered when selected rectangles are cleared.
- * @argument index Specify the image.
- */
-RegisterEvent('OnImageAreaDeSelected',
-    function (index: number) {}
-): boolean; 
-```
+* [click](#click)
+* [contextmenu](#contextmenu)
+* [dblclick](#dblclick)
+* [mousemove](#mousemove)
+* [pageAreaSelected](#pageareaselected)
+* [pageAreaUnselected](#pageareaunselected)
+* [pageRendered](#pagerendered)
+* [resize](#resize)
+* [topPageChanged](#toppagechanged)
+
+> The following APIs are deprecated as of v16.2, check out [Viewer related API changes in version 16.2]({{site.info}}api/appendix.html#viewer-related-api-changes-in-versoin-16.2).
+
+**Methods**
+
+* `BindViewer()`
+* `UnbindView()`
+* `UpdateViewer()`
+
+**Properties**
+
+* `BackgroundColor`
+* `SelectionImageBorderColor`
+* `FitWindowType`
+* `IfFitWindow`
+* `Height`
+* `Width`
+* `IfAutoScroll`
+* `ShowPageNumber`
+* `MouseX`
+* `MouseY`
+* `ImageMargin`
+* `MouseShape`
+* `SelectionRectAspectRatio`
+* `Zoom`
+
+**Events**
+
+* `OnMouseClick`
+* `OnMouseDoubleClick`
+* `OnMouseMove`
+* `OnMouseRightClick`
+* `OnImageAreaSelected`
+* `OnImageAreaDeSelected`
 
 ---
 
@@ -636,114 +182,6 @@ DWObject.Viewer.setButtonClass("crop", "CropClass");
 
 ---
 
-## zoomIn
-
-**Syntax**
-
-``` typescript
-/**
- * Zoom in by 6/5.
- */
-zoomIn(): boolean;
-```
-
----
-
-## zoomOut
-
-**Syntax**
-
-``` typescript
-/**
- * Zoom out by 5/6.
- */
-zoomOut(): boolean;
-```
-
----
-
-## bindCustomElement
-
-**Syntax**
-
-``` typescript
-/**
- * Bind a custom element to the viewer to add extra features.
- * @param Id Specify the element by its Id.
- * @param priority Specify the importance of the element.
- * @param fullScreen Whether to show the element full-screen.
- */
-bindCustomElement(
-    Id: string,
-    priority: number,
-    fullScreen: boolean
-): boolean;
-```
-
-**Usage notes**
-
-You can put any information in the custom element. Once bound, it'll be managed by the viewer.
-
----
-
-## unBindCustomElement
-
-**Syntax**
-
-``` typescript
-/**
- * Unbind a custom element from the viewer.
- * @param Id Specify the element by its Id.
- */
-unBindCustomElement(
-    Id: string
-): boolean;
-```
-
----
-
-## showCustomElement
-
-**Syntax**
-
-``` typescript
-/**
- * Show the custom element.
- * @param name Specify the element by its Id.
- */
-showCustomElement(Id: string): boolean;
-```
-
----
-
-## hideCustomElement
-
-**Syntax**
-
-``` typescript
-/**
- * Hide the custom element.
- * @param name Specify the element by its Id.
- */
-hideCustomElement(Id: string): boolean;
-```
-
----
-
-## toggleCustomElement
-
-**Syntax**
-
-``` typescript
-/**
- * Show or hide the custom element.
- * @param name Specify the element by its Id.
- */
-toggleCustomElement(Id: string): boolean;
-```
-
----
-
 ## on
 
 **Syntax**
@@ -755,60 +193,6 @@ toggleCustomElement(Id: string): boolean;
  * @param callback The event listener
  */
 on(name: string, callback: () => void): boolean;
-```
-
----
-
-## video-closed
-
-**Syntax**
-
-``` typescript
-/**
- * This event is triggered when the video is closed.
- */
-on("video-closed", callback: () => void): boolean;
-```
-
----
-
-## video-error
-
-**Syntax**
-
-``` typescript
-/**
- * This event is triggered when the video playing operation. throws out an error.
- * @argument errorCode The error code.
- * @argument errorString The error string.
- */
-on("video-error", callback: (errorCode, errorString) => void): boolean;
-```
-
----
-
-## bOnlyShowThumbnailsView
-
-**Syntax**
-
-``` typescript
-/**
- * Whether to only show the thumbnails view.
- */
-bOnlyShowThumbnailsView: boolean;
-```
-
----
-
-## cursorOverThumbnailsView
-
-**Syntax**
-
-``` typescript
-/**
- * Set the shape of the cursor over the thumbnails view.
- */
-cursorOverThumbnailsView: string;
 ```
 
 ---

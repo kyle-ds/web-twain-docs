@@ -25,14 +25,20 @@ description: Dynamic Web TWAIN SDK Documentation Schedule Stable Release Page
   + Existing pages are filtered by a specified tag.
   + Page selection changes.
 
-* Added a configuration page to update the host or ports of the Dynamsoft Service. By default, this page can be accessed by the URL http://127.0.0.1:18625/admin/ or https://127.0.0.1:18626/admin/.
+* Added a configuration page to update the host or ports of the Dynamsoft Service. By default, this page can be accessed by the URL http://127.0.0.1:18625/admin/.
 
 * The default loader bar can now be customized with the API [`Dynamsoft.WebTwainEnv.CustomizableDisplayInfo.loaderBarSource`]({{site.info}}api/Dynamsoft_WebTwainEnv.html#loaderbarsource). 
   + Only effective upon initialization of the SDK.
 
 * Added a new global property [`Dynamsoft.WebTwainEnv.IfAlwaysFocusOnPopupWindow`]({{site.info}}api/Dynamsoft_WebTwainEnv.html#ifalwaysfocusonpopupwindow) to control whether to set focus on windows opened by the Dynamsoft Service when the browser tab on which the SDK is running is active. In the past, these windows will be on top no matter which browser tab is active.
 
+* [Shadow DOM](https://developer.mozilla.org/en-US/docs/Web/Web_Components/Using_shadow_DOM) is officially supported.
+
 ### Improved Features
+
+* Made the viewer more independent and reorganized related APIs.
+  + Added a new gloal property [`Dynamsoft.WebTwainEnv.UseDefaultViewer`]({{site.info}}api/Dynamsoft_WebTwainEnv.html#usedefaultviewer) to control whether the built-in viewer is used.
+  + Check out the [Viewer related API changes in version 16.2]({{site.info}}api/appendix.html#viewer-related-api-changes-in-versoin-16.2).
 
 * Scanning remotely now supports showing the Manufacturer's User Interface.
   + Only when the remote machine is Windows.
@@ -46,21 +52,33 @@ description: Dynamic Web TWAIN SDK Documentation Schedule Stable Release Page
 
 * Updated the signatures for the files on macOS so that TWAIN drivers can be populated correctly.
 
-### Better Performance
+* Added global configuration options for the WASM-mode which includes [`maxHeapSize`]({{site.info}}api/Dynamsoft_WebTwainEnv.html#maxheapsize) and [`fetchOptions`]({{site.info}}api/Dynamsoft_WebTwainEnv.html#fetchoptions).
+
+* The Barcode Reader add-on is upgraded from 7.4.0.0428 to 7.6.0.0112.
+
+* Improved the display quality of the viewer in single-image mode (-1 * -1).
 
 ### Bug Fixes
 
 * Fixed a bug where if you create a `WebTwain` instance under WASM-mode and then destroy it and create another `WebTwain` instance under Service-mode, you will be prompted to install the Dynamsoft Service even if it is already installed.
+
 * Fixed a bug with the scanner model "Canon DR-M260" (200 series) where the manufacturer's UI hangs or disappears once it is shown.
+
 * Fixed a bug on macOS where 1-bit TIFF files become inverted once they are transferred via the system clipboard.
+
+* Fixed a bug where changing the UI of the image editor will affect the main viewer.
+
+* Fixed a bug where the method [`updateRuntimeSettings`]({{site.info}}api/Addon_BarcodeReader.html#updateruntimesettings) will overwrite all settings you set with the method [`initRuntimeSettingsWithString`]({{site.info}}api/Addon_BarcodeReader.html#initruntimesettingswithstring).
+
+* Fixed a bug where the wrong PDF library is referenced when the SDK switches to the Service-mode from WASM-mode.
 
 ### Deprecations
 
-No deprecation in version 16.2.
+* Check out the [Viewer related API changes in version 16.2]({{site.info}}api/appendix.html#viewer-related-api-changes-in-versoin-16.2).
 
 ### Changed Behaviours
 
-* When the view changes from singe-image mode to multi-image mode, the cursor used to be changed to `hand` which means you can drag and drop images, in v16.2, the cursor will stay unchanged. In other words, if the cursor was `crosshair` in single-image mode, it'll continue to be `crosshair` in multi-image mode which means you can continue to draw rectangles on these images (NOTE that you can only draw on the current image). You can use the property [Viewer.cursor]({{site.info}}api/WebTwain_Viewer.html#cursor) to change the cursor in this case.
+* When the view changes from single-image mode to multi-image mode, the cursor used to be changed to `hand` which means you can drag and drop images, in v16.2, the cursor will stay unchanged. In other words, if the cursor was `crosshair` in single-image mode, it'll continue to be `crosshair` in multi-image mode which means you can continue to draw rectangles on these images (NOTE that you can only draw on the current image). You can use the property [Viewer.cursor]({{site.info}}api/WebTwain_Viewer.html#cursor) to change the cursor in this case.
 
 * The properties [`Width`]({{site.info}}api/WebTwain_Viewer.html#width) and [`Height`]({{site.info}}api/WebTwain_Viewer.html#height) will always return the actual number of pixels even if you set them with a percentage like "50%".
 
@@ -72,23 +90,35 @@ No deprecation in version 16.2.
 
 * On macOS, the default transfer mode for TWAIN drivers is changed from `native` to `memory`, this is because 64bit macOS only supports `memory` mode.
 
+* The `Cut` (`Erase`) button in the image editor now cuts the selected area to the clipboard instead of just erasing the area.
+
+* The `Stretch` button is deleted from the image editor.
+
 ### Breaking changes
 
 #### Moved
 
-* The methods `showVideo()` and `closeVideo()` are moved from the inteface `Viewer` to `Addon.Camera`.
+* The methods `showVideo()` and `closeVideo()` are moved from the interface `Viewer` to `Addon.Camera`.
+
 * The method [`showVideo()`]({{site.info}}api/Addon_Camera.html#showvideo) has added two more parameters `mode` and `fill`. The default mode is `picture` which is new. To get the old behavior, use the `document` mode.
 
 #### Deleted
 
 * The property `SelectedImagesCount` and the method `GetSelectedImageIndex()` are deleted. Use [`SelectedImagesIndices`]({{site.info}}api/WebTwain_Buffer.html#selectedimagesindices) instead.
+
 * The method `SetSelectedImageIndex()` is deleted. Use [`SelectImages()`]({{site.info}}api/WebTwain_Buffer.html#selectimages) instead.
+
 * The method `UpdateViewer()` is deleted. There is no alternative method.
+
 * The second parameter for the method `BindViewer()` is deleted and it has only one parameter to specify the HTML element now. Therefore, you cannot use this method to create a thumbnail viewer anymore. Use the new method [`createThumbnailViewer()`]({{site.info}}api/WebTwain_Viewer.html#createthumbnailviewer) instead.
+
+#### Others
+
+* Check out [Viewer related API changes in version 16.2]({{site.info}}api/appendix.html#viewer-related-api-changes-in-versoin-16.2).
 
 ### Changes to the ActiveX Edition
 
-No changes in version 16.1.
+* Fixed a bug where when saving an image as TIFF, the same image gets duplicated in the buffer.
 
 ## `16.1.1` (08/13/2020)
 

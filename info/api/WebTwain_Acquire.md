@@ -156,7 +156,8 @@ AcquireImage(
 
 interface DeviceConfiguration {
     /**
-     * Whether to show the built-in User Interface from the device vendor
+     * Whether to show the built-in User Interface from the device vendor.
+     * In v16.2+, it can also control whether to use the UI remotely.
      */
     IfShowUI?: boolean;
     /**
@@ -190,7 +191,17 @@ interface DeviceConfiguration {
     /**
      * How much extended information is retrieved. Only valid when {IfGetExtImageInfo} is true.
      */
-    extendedImageInfoQueryLevel?: number
+    extendedImageInfoQueryLevel?: number;
+    /**
+     * Whether to scan from a remote computer.
+     * (Added in 16.2)
+     */
+    RemoteScan:boolean;
+    /**
+     * Specify a source by its index.
+     * (Added in 16.2)
+     */
+    SelectSourceByIndex: number;
 }
 ```
 
@@ -281,6 +292,10 @@ If it's set to 1, the following will also be retrieved (if available):
 | TWEI_PRINTERTEXT | 0x124A |
 
 If it's set to 2, then besides what's mentioned in the two tables above, the Dynamci Web TWAIN library will also try to query the scanner for its own custom extended image info.
+
+* Remote Scan
+
+  When [scanning remotely]({{site.indepth}}feature/input.html#scan-from-a-remote-scanner), if the method is called without any parameter, [`IfShowUI`](#ifshowui) must be set to `false`.
 
 **Example**
 
@@ -559,8 +574,9 @@ SelectSource(
 
 **Usage notes**
 
-It's recommended to use this API asynchronously by pass arguments to the parameters `successCallback` and `failureCallback` .
-On `Windows` and `Windows` only, you can call this method with no arguments so that it runs synchronously and return a boolean value.
+* It's recommended to use this API asynchronously by pass arguments to the parameters `successCallback` and `failureCallback` .
+* On `Windows` and `Windows` only, you can call this method with no arguments so that it runs synchronously and return a boolean value.
+* When [scanning remotely]({{site.indepth}}feature/input.html#scan-from-a-remote-scanner), this method must be called asynchronously. 
 
 **Example**
 

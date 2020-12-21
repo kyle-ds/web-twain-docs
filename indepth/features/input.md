@@ -495,24 +495,25 @@ sources.find(function(name, index) {
 
 #### On Windows desktop where the scanner is physically connected
 
-1. Install `Dynamsoft Service`
-2. Configure the Service by adding the following line to the file `DSConfiguration.ini` 
+1. Install `Dynamsoft Service`.
+2. Configure the Service by adding the following line to the file `DSConfiguration.ini` .
 
 ``` 
 Server=192.168.8.221
 ```
   > We are assuminge the IP of this desktop is `192.168.8.221`
+  > From v16.2, you can do the same on this page http://127.0.0.1:18625/admin/
 
 3. Find the service `Dynamsoft Service` in Windows services list and restart it.
 
 #### In your application
 
-4. Create a WebTwain instance to connect to that service
+4. Create a WebTwain instance to connect to that service.
 
 > Learn more [here]({{site.indepth}}features/initialize.html#dynamsoftwebtwainenvcreatedwtobject)
 
 ``` javascript
-Dynamsoft.WebTwainEnv.CreateDWTObject(
+Dynamsoft.WebTwainEnv.CreateDWTObjectEx(
     "dwtcontrolContainer",
     "192.168.8.221", 18622, 18623,
     function(dwtObject) {
@@ -524,7 +525,24 @@ Dynamsoft.WebTwainEnv.CreateDWTObject(
 );
 ```
 
-1. Use this WebTwain instance, `DWObject`, to scan documents from the scanner connected to the desktop (192.168.8.221)
+5. Use this `WebTwain` instance, `DWObject`, to scan documents from the scanner connected to the desktop (192.168.8.221).
+
+> As this `WebTwain` instance is interacting with a Dynamsoft Service running remotely, it's recommended to only use it for scanning (other features may not work correctly).
+
+```javascript
+var deviceConfiguration = {
+    IfShowUI: true, //Only supported in v16.2+
+    RemoteScan: true, //Only supported in v16.2+
+    SelectSourceByIndex: 1, //Only supported in v16.2+
+    PixelType:Dynamsoft.EnumDWT_PixelType.TWPT_RGB,
+    Resolution: 300,
+    IfFeederEnabled: false,
+    IfDuplexEnabled: false,
+    IfDisableSourceAfterAcquire: true
+};
+ 
+DWObject.AcquireImage(deviceConfiguration);
+```
 
 <!--
 

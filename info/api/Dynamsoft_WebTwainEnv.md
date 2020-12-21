@@ -63,11 +63,22 @@ interface Dynamsoft.WebTwainEnv {
     OnWebTwainPreExecute: function () {};
     OnWebTwainReady: function () {};
     OnWebTwainWillInit: function () {};
+    UseDefaultViewer: boolean;
     CustomizableDisplayInfo: CustomizableDisplayInfo;
+    WasmConfig: WasmConfig;
 }
 interface CustomizableDisplayInfo {
   // Specify the source of the loader bar.
   loaderBarSource: string;
+}
+interface WasmConfig {
+  maxHeapSize: number;
+  fetchOptions: fetchOptions;
+}
+interface fetchOptions {
+  headers: HeadersInit;
+  mode: RequestMode;
+  credentials: RequestCredentials;
 }
 ```
 
@@ -119,10 +130,11 @@ Creates a new UI-less `WebTwain` instance. This instance will be uniquely identi
 
 ``` typescript
 interface DWTInitialConfig {
-  WebTwainId: string,
-  Host ? : string,
-  Port ? : string,
-  PortSSL ? : string
+  WebTwainId: string;
+  Host ? : string;
+  Port ? : string;
+  PortSSL ? : string;
+  UseLocalService?: boolean;
 }
 ```
 
@@ -150,9 +162,32 @@ Registers an environmental event. Typically the event is `OnWebTwainReady` which
 
 Destroys all `WebTwain` instances and cuts off the connection to the Dynamsoft Service.
 
+### `UseDefaultViewer`
+
+Whether to use the built-in viewer.
+
 ### `CustomizableDisplayInfo`
 
-#### loaderBarSource
+#### `loaderBarSource`
 
 Specify the source of the loader bar.
   
+### `WasmConfig`
+
+#### `maxHeapSize`
+
+Specify the maximum memory allowed to be used by the library when it's in WASM-mode. By default, it's 200 (MB).
+
+#### `fetchOptions`
+
+* `headers`
+
+A Headers object, an object literal, or an array of two-item arrays to set request's headers. Check out [HeadersInit](https://microsoft.github.io/PowerBI-JavaScript/modules/_node_modules_typedoc_node_modules_typescript_lib_lib_dom_d_.html#headersinit).
+
+* `mode`
+
+A string to indicate whether the request will use CORS, or will be restricted to same-origin URLs. Sets request's mode. Check out [RequestMode](https://microsoft.github.io/PowerBI-JavaScript/modules/_node_modules_typedoc_node_modules_typescript_lib_lib_dom_d_.html#requestmode).
+
+* `credentials`
+
+A string indicating whether credentials will be sent with the request always, never, or only when sent to a same-origin URL. Sets request's credentials. Check out [RequestCredentials](https://microsoft.github.io/PowerBI-JavaScript/modules/_node_modules_typedoc_node_modules_typescript_lib_lib_dom_d_.html#requestcredentials).
