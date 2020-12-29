@@ -500,7 +500,6 @@ DWObject.Viewer.on('pageAreaSelected', function(sImageIndex, rect){console.log(s
 ``` typescript
 /**
  * Return the index of the previous image of the currently selected image.
- * 
  */
 previous(): number; 
 ```
@@ -520,7 +519,6 @@ var currentIndex=DWObject.Viewer.previous();// return 2
 /**
  * Refresh the viewer.
  */
-
 render(): void; 
 ```
 
@@ -550,15 +548,15 @@ setButtonClass(
 ): boolean;
 ```
 
-**Usage notes**
-
-Use this method to fine-tune the buttons in updateUISetting with CSS.
-
 **Example**
 
 ``` javascript
 DWObject.Viewer.setButtonClass('crop', 'ds-dwt-ui-icon-cropImage-grey');  
 ```
+
+**Usage notes**
+
+Use this method to fine-tune the buttons in updateUISetting with CSS.
 
 ## setSelectedAreas 
 
@@ -579,17 +577,17 @@ interface Area{}
     right: number,
     bottom: number,
 );
-
 ```
-**Usage notes**
-
-The coordinates are based on the size of the original image (instead of the size of the viewer).
 
 **Example**
 
 ``` typescript
 DWObject.Viewer.setSelectedAreas([{left:0, top:0, right:100, bottom:100}],[{left:200, top:200, right:400, bottom:500}]); 
 ```
+
+**Usage notes**
+
+The coordinates are based on the size of the original image (instead of the size of the viewer).
 
 ## setViewMode
 
@@ -620,7 +618,6 @@ DWObject.Viewer.setViewMode(2, 2);
 ``` typescript
 /**
  * Show the viewer you created(ImageEditor, ThumbnailViewer, CustomElement).
- * 
  */
 show(): void; 
 ```
@@ -749,10 +746,6 @@ DWObject.Viewer.cursor = 'crosshair';
 height: number | string;
 ```
 
-**Usage Notes**
-
-If a number is assigned, it means that number of pixels (px). If a string is assigned, it is either a fixed size like "500px" or a dynamic size like "50%" which follows standard CSS rules.
-
 **Example**
 
 ``` javascript
@@ -760,6 +753,10 @@ DWObject.Viewer.height = 350;
 DWObject.Viewer.height = "350px";
 DWObject.Viewer.height = "100%";
 ```
+
+**Usage Notes**
+
+If a number is assigned, it means that number of pixels (px). If a string is assigned, it is either a fixed size like "500px" or a dynamic size like "50%" which follows standard CSS rules.
 
 ## idPostfix
 
@@ -804,18 +801,18 @@ DWObject.Viewer.innerBorder = '1px solid rgb(204, 204, 204)';
 /**
  * Return or set the margin between images.
  */
-.pageMargin: number | string; 
+pageMargin: number | string; 
 ```
-
-**Usage Notes**
-
-The page margin is only effective when the view mode is not -1 * -1.
 
 **Example**
 
 ``` typescript
 DWObject.Viewer.pageMargin = 10;  
 ```
+
+**Usage Notes**
+
+The page margin is only effective when the view mode is not -1 * -1.
 
 ## selectedAreaBorderColor
 
