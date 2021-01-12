@@ -457,8 +457,8 @@ var currentIndex=DWObject.Viewer.next();// return 4
 
 ``` typescript
 /**
- * Unbind the viewer event.
- * 
+ * Remove a built-in viewer event handler.
+ * @param eventName Specify the event name.
  */
 Viewer.off(
     eventName: string, 
@@ -478,8 +478,9 @@ DWObject.Viewer.off('pageAreaSelected');
 
 ``` typescript
 /**
- * Bind the viewer event.
- * @param eventName The event name.
+ * Specify an event listener for the specified built-in viewer event.
+ * @param eventName Specify the event name.
+ * @param callback The event listener.
  */
 Viewer.on(
     eventName: string, 
