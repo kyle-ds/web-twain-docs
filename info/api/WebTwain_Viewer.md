@@ -675,7 +675,7 @@ DWObject.Viewer.acceptDrop = true;
 
 ``` typescript
 /**
- * Return or set the background colour of the viewer.
+ * Return or set the background colour/image of the viewer.
  */
 background: string;
 ```
@@ -683,7 +683,8 @@ background: string;
 **Example**
 
 ``` typescript
-DWObject.Viewer.background = 'rgb(255, 255, 255);';  
+DWObject.Viewer.background = "rgb(255, 0, 0)";  
+DWObject.Viewer.background = "url('Styles/Images/canvasbackground.png') center /auto no-repeat, #f5f5f5"
 ```
 
 **Usage notes**
@@ -726,9 +727,9 @@ The allowed values are:
 | Value | Description |
 |:-|:-|
 | default | The shape is “arrow”.|
-| crosshair (defalut value) | The shape is “crosshair”, you can drag to select an area on the image. |
+| crosshair (defalut value) | The shape is “crosshair”, which supports drag to select an area on the image. |
 | pointer | The shape is “hand”. Only works if the view mode of the viewer is set to -1 * -1, and the displayed image does not fit the Window (when there is a scroll bar), then the image can be moved.|
-| zoom-in | The shape is “magnifier”, supports click the image to zoom in. Only works if the view mode of the viewer is set to -1 by -1.|
+| zoom-in | The shape is “magnifier”, which supports click the image to zoom in. Only works if the view mode of the viewer is set to -1 by -1.|
 
 **Example**
 
@@ -765,7 +766,7 @@ If a number is assigned, it means that number of pixels (px). If a string is ass
 
 ``` typescript
 /**
- * Return the postfix of the Ids of the elements in the viewer.
+ * Return the postfix of the main viewer.
  */ 
 readonly Viewer.idPostfix: string;
 ```
@@ -774,6 +775,25 @@ readonly Viewer.idPostfix: string;
 
 ``` javascript
 var myViewerIdPostfix = DWObject.Viewer.idPostfix;
+```
+
+
+## ifAutoScroll 
+
+**Syntax**
+
+``` typescript
+/**
+ * Returns or sets whether to display the newly added image or keep the current one after an image(s) is imported into the Dynamic Web TWAIN viewer.
+* The default value of the IfAutoScroll property is true.
+ */ 
+ifAutoScroll: boolean; 
+```
+
+**Example**
+
+``` javascript
+DWObject.Viewer.ifAutoScroll = true;  
 ```
 
 ## innerBorder
