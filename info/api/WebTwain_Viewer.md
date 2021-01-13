@@ -135,7 +135,7 @@ Replace the previous `BindViewer` method.
 
 ``` typescript
 /**
- * Clear the selected area(s) on the current image
+ * Clear the selected area(s) on the current image.
  */
 clearSelectedAreas(): void;
 ```
@@ -151,11 +151,10 @@ DWObject.Viewer.clearSelectedAreas();
 
 ``` typescript
 /**
- * Add a custom page DIV element and specify its position and display order, and return an object that can control this element.
- * Generate an independent CustomElement object. 
- * @param element HTMLDivElement is required.
- * @param location? Define where to place the custom element. The optional values are left and right, and the default value is right.
- * @param isFull The default value is false, that is, the created CustomElement is displayed according to the set area. If set to true, the main viewer will display all the contents of CustomElement, and the other contents of the main viewer will be covered below.
+ * Create a custom element and append it to the main viewer.
+ * @param element Specify an element (not ID).
+ * @param location? Define where to place the custom element. The allowed values are left, top, right, bottom.
+ * @param isFull Whether to display the element in full screen. 
  */
 createCustomElement(
     element: HTMLDivElement, 
@@ -187,8 +186,8 @@ When call unbind, all created CustomElement objects, ThumbnailViewer objects, an
 
 ``` typescript
 /** 
- * Generate an independent ImageEditor object.
- * @param editorSettings? the ImageEditor settings
+ * Create an image editor with specified settings.
+ * @param editorSettings? The ImageEditor settings. If not set, the default setting is used.
  */
  createImageEditor(
      editorSettings?: EditorSettings
@@ -267,7 +266,7 @@ imageEditor.show();
 
 Replace the previous `ShowImageEditor` method.
 
-Only one ImageEditor object can be created. If you create it a second time or more, you'll get 'An ImageEditor already exists.' error, and an existing ImageEditor object will be returned.
+Only one ImageEditor object can be created. If you create it multiple times, you'll receive 'An ImageEditor already exists' error, and an existing ImageEditor object will be returned.
 
 When call unbind, all created CustomElement objects, ThumbnailViewer objects, and ImageEditor objects will be disposed. After rebinding the viewer, you need to recreate the CustomElement object, ThumbnailViewer object, and ImageEditor object.
 
@@ -277,12 +276,18 @@ When call unbind, all created CustomElement objects, ThumbnailViewer objects, an
 
 ``` typescript
 /**
- * Generate a independent ThumbnailViewer object.
+ * Create a thumbnail viewer with specified settings.
  * @param thumbnailViewerSettings? the thumbnailViewer settings
  */
  createThumbnailViewer(
      thumbnailViewerSettings?: thumbnailViewerSettings
  ):ThumbnailViewer;
+
+ interface thumbnailViewerSettings{
+
+
+
+ }
 ```
 
 **Example**
@@ -295,6 +300,7 @@ objThumbnailViewer.show(); //call show to display the thumbnail viewer.
 
 [Yesterday 5:21 PM] Ellie
     var thumbnailViewerSettings = {​​​​​​​
+
     location: 'left',
     size: '30%',
     columns: 1,
@@ -353,8 +359,8 @@ DWObject.Viewer.first();
 
 ``` typescript
 /**
- * Set how the image is fit in the viewer.
- * @param type specify a type to fit 
+ * Fit the image to the window
+ * @param type Specify a type to fit. (width, height, both)
  */
 fitWindow(
     type: string
@@ -383,7 +389,7 @@ height: Fit the image horizontally.
 
 ``` typescript
 /**
- * Go to the image you specified.
+ * Go to the specified image.
  * @param index Specify the image.
  */
 gotoPage(
@@ -403,7 +409,7 @@ DWObject.Viewer.gotoPage(0);
 
 ``` typescript
 /**
- * Hide the image editor.
+ * Hide the viewer (Main viewer, ImageEditor, ThumbnailViewer, CustomElement).
  */
 hide(): void;
 ```
@@ -457,8 +463,9 @@ var currentIndex=DWObject.Viewer.next();// return 4
 
 ``` typescript
 /**
- * Remove a built-in viewer event handler.
+ * Remove event handler.
  * @param eventName Specify the event name.
+ * @param callback The event listener.
  */
 Viewer.off(
     eventName: string, 
@@ -478,7 +485,7 @@ DWObject.Viewer.off('pageAreaSelected');
 
 ``` typescript
 /**
- * Specify an event listener for the specified built-in viewer event.
+ * Specify an event listener for the viewer event.
  * @param eventName Specify the event name.
  * @param callback The event listener.
  */
@@ -518,7 +525,7 @@ var currentIndex=DWObject.Viewer.previous();// return 2
 
 ``` typescript
 /**
- * Refresh the viewer.
+ * Refresh the viewer, the effect is shown in "onPageRender" event.
  */
 render(): void; 
 ```
@@ -565,8 +572,8 @@ Use this method to fine-tune the buttons in updateUISetting with CSS.
 
 ``` typescript
 /**
- * set one or more rectangular area on the specified image.
- * @param areas Specify the rectangle.
+ * Set one or more rectangular area(s) on the specified image.
+ * @param areas Specify the areas.
  */
 setSelectedAreas(
     areas: Area[]
@@ -618,7 +625,7 @@ DWObject.Viewer.setViewMode(2, 2);
 
 ``` typescript
 /**
- * Show the viewer you created(ImageEditor, ThumbnailViewer, CustomElement).
+ * Show the viewer you created(Main viewer, ImageEditor, ThumbnailViewer, CustomElement).
  */
 show(): void; 
 ```
@@ -657,7 +664,7 @@ Replace the previous `UnbindViewer` method.
 
 ``` typescript
 /**
- * Set whether to disable the drag and drop image to the viewer function.
+ * Set whether to disable the ability to drag and drop image to the viewer.
  * The default value is true.
  */
 acceptDrop: boolean; 
@@ -668,6 +675,27 @@ acceptDrop: boolean;
 ``` typescript
 DWObject.Viewer.acceptDrop = true;  
 ```
+
+## allowSlide
+
+**Syntax**
+
+``` typescript
+/**
+ * Whether to allow sliding.
+ * The default value is true which supports swiping left and right to switch images.
+ */
+allowSlide: boolean; 
+```
+
+**Example**
+
+``` typescript
+DWObject.Viewer.allowSlide = true;  
+
+**Usage notes**
+
+Only works if the view mode of the viewer is set to -1 * -1.
 
 ## background
 
@@ -820,7 +848,8 @@ DWObject.Viewer.innerBorder = '1px solid rgb(204, 204, 204)';
 
 ``` typescript
 /**
- * Return or set the margin between images.
+ * Return or set the margin between images in the main viewer.
+ * number in pixels, string in percentage.
  */
 pageMargin: number | string; 
 ```
@@ -829,11 +858,13 @@ pageMargin: number | string;
 
 ``` typescript
 DWObject.Viewer.pageMargin = 10;  
+
+DWObject.Viewer.pageMargin ='10%';
 ```
 
 **Usage Notes**
 
-The page margin is only effective when the view mode is not -1 * -1.
+The pageMargin is only effective when the view mode is not -1 * -1.
 
 ## selectedAreaBorderColor
 
@@ -841,7 +872,7 @@ The page margin is only effective when the view mode is not -1 * -1.
 
 ``` typescript
 /**
- * Set the border color of the selected area 
+ * Set the border color of the selected area.
  * The default value is rgb(42, 29, 43)
  */
 selectedAreaBorderColor: string; 
@@ -859,7 +890,7 @@ DWObject.Viewer.selectedAreaBorderColor = 'rgb(255, 0, 0)';
 
 ``` typescript
 /**
- * Set the selected page background color of the Thumbnail viewer.
+ * Set the selected page background color of the viewer.
  * Defalut value： rgb(199, 222, 252)
  */
 selectedPageBackground: string; 
@@ -900,6 +931,7 @@ This API is only effective when the view mode is not -1 * -1.
 ``` typescript
 /**
  * Specify a aspect ratio to be used when selecting a rectangle on an image.
+ * The default value is 0.
  */
 selectionRectAspectRatio: number | string; 
 ```
@@ -1011,8 +1043,8 @@ When you set the property and the view mode is -1 * -1, the view will zoom in or
 ``` typescript
 /** 
  * A built-in callback triggered when the mouse click | right-click | double-click| on an image or move over it.
- * @param eventName The event name.
- * @argument index The index of the current image.
+ * @param eventName Specify the event name.
+ * @param callback The event listener.
  */
 Viewer.on(
     eventName: string, 
@@ -1033,11 +1065,11 @@ interface ViewerEvent{
      */ 
     imageY: number; 
    /** 
-    * The x-coordinate of the browser page.
+    * The x-coordinate relative to the browser page.
     */ 
      pageX: number; 
    /** 
-    * The y-coordinate of the browser page.
+    * The y-coordinate relative to the browser page.
     */ 
      pageY: number; 
 } 
