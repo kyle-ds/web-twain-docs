@@ -14,3 +14,5 @@ description: Dynamic Web TWAIN SDK Documentation Troubleshooting Index Page
 ## [License Errors]({{site.indepth}}troubleshooting/license-errors/index.html)
 
 ## [Common Errors]({{site.indepth}}troubleshooting/common-errors/index.html)
+
+## [Error Codes]({{site.info}}api/appending.html#error-list)
